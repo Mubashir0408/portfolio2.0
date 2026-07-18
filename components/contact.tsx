@@ -39,13 +39,33 @@ export function Contact() {
     resolver: zodResolver(contactSchema),
   });
 
-  async function onSubmit() {
-    setStatus("submitting");
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+  async function onSubmit(data: ContactFormValues) {
+  setStatus("submitting");
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+
     setStatus("success");
     reset();
+
     setTimeout(() => setStatus("idle"), 4000);
+  } catch (error) {
+    console.error(error);
+    setStatus("idle");
+    alert("Something went wrong. Please try again.");
   }
+}
+
 
   return (
     <section id="contact" className="relative py-28 md:py-36">
