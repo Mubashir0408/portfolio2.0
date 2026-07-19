@@ -5,10 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { PageTransition } from "@/components/page-transition";
+import { SiteChrome } from "@/components/site-chrome";
 
 import "./globals.css";
 
@@ -101,12 +98,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <ScrollProgress />
-          <Navbar />
-          <main id="main-content">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </ThemeProvider>
       </body>
     </html>
