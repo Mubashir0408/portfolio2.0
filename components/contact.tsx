@@ -5,10 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { CheckCircle2, Loader2, Mail, MapPin, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { SITE_CONFIG } from "@/lib/constants";
 import { fadeLeft, fadeRight, viewportOnce } from "@/lib/animations";
+import { contactSchema, type ContactFormValues } from "@/lib/validations/contact";
 import { SectionHeading } from "@/components/section-heading";
 import { SocialLinks } from "@/components/social-links";
 import { Button } from "@/components/ui/button";
@@ -16,19 +16,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Please enter your full name"),
-  email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(4, "Subject must be at least 4 characters"),
-  message: z.string().min(20, "Message must be at least 20 characters"),
-});
-
-type ContactFormValues = z.infer<typeof contactSchema>;
-
 export function Contact() {
   const [status, setStatus] = React.useState<"idle" | "submitting" | "success">(
     "idle"
   );
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const {
     register,
@@ -40,31 +32,40 @@ export function Contact() {
   });
 
   async function onSubmit(data: ContactFormValues) {
-  setStatus("submitting");
+    setStatus("submitting");
+    setErrorMessage(null);
 
-  try {
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    if (!response.ok) {
-      throw new Error("Failed to send message");
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message ?? "Failed to send message. Please try again."
+        );
+      }
+
+      setStatus("success");
+      reset();
+
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch (error) {
+      console.error(error);
+      setStatus("idle");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
     }
-
-    setStatus("success");
-    reset();
-
-    setTimeout(() => setStatus("idle"), 4000);
-  } catch (error) {
-    console.error(error);
-    setStatus("idle");
-    alert("Something went wrong. Please try again.");
   }
-}
 
 
   return (
@@ -180,6 +181,12 @@ export function Contact() {
                   <p className="text-xs text-destructive">{errors.message.message}</p>
                 ) : null}
               </div>
+
+              {errorMessage ? (
+                <p className="text-sm text-destructive" role="alert">
+                  {errorMessage}
+                </p>
+              ) : null}
 
               <Button
                 type="submit"

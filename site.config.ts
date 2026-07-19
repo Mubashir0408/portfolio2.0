@@ -44,7 +44,7 @@ export const PERSONAL_INFO = {
   status: "Open to Internship and Freelance Opportunities",
 
   // Contact
-  email: "mubashirijaz547@gmail.com",
+  email: "mubashirejazkhan@gmail.com",
 
   // TODO: replace with your real GitHub / LinkedIn usernames (used to build
   // full profile URLs everywhere on the site — navbar, footer, contact page).
