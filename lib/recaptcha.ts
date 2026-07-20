@@ -48,9 +48,14 @@ export async function verifyRecaptcha(
       body: params.toString(),
     });
 
-    const data = (await response.json()) as { success: boolean; score?: number };
+    const data = (await response.json()) as {
+      success: boolean;
+      score?: number;
+      "error-codes"?: string[];
+    };
 
     if (!data.success) {
+      console.error("[recaptcha] Verification rejected by Google:", data["error-codes"]);
       return { ok: false, reason: "verification_failed" };
     }
 
