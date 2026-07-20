@@ -19,6 +19,7 @@ const ERROR_MESSAGES: Record<string, string> = {
   invalid_credentials: "Invalid email or password.",
   rate_limited: "Too many failed login attempts. Please try again in 10 minutes.",
   recaptcha_failed: "Unable to verify reCAPTCHA. Please refresh the page.",
+  server_error: "Something went wrong. Please try again in a moment.",
 };
 
 function resolveErrorMessage(code: string | undefined): string {
@@ -59,22 +60,31 @@ export function LoginForm() {
     setError(null);
     setIsSubmitting(true);
 
-    const recaptchaToken = await executeRecaptcha("login");
+    try {
+      const recaptchaToken = await executeRecaptcha("login");
 
-    const result = await signIn("credentials", {
-      ...data,
-      recaptchaToken: recaptchaToken ?? "",
-      redirect: false,
-    });
+      const result = await signIn("credentials", {
+        ...data,
+        recaptchaToken: recaptchaToken ?? "",
+        redirect: false,
+      });
 
-    if (!result || result.error) {
-      setError(resolveErrorMessage(result?.code));
+      if (!result || result.error) {
+        setError(resolveErrorMessage(result?.code));
+        setIsSubmitting(false);
+        return;
+      }
+
+      router.push(callbackUrl);
+      router.refresh();
+    } catch (error) {
+      // signIn() itself can throw (e.g. a raw 500 with a non-JSON body) —
+      // without this, a hard server error left the button stuck on
+      // "Signing in..." forever with no feedback at all.
+      console.error("[login] Unexpected error during sign-in:", error);
+      setError(ERROR_MESSAGES.server_error!);
       setIsSubmitting(false);
-      return;
     }
-
-    router.push(callbackUrl);
-    router.refresh();
   }
 
   return (

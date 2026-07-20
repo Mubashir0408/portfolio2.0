@@ -36,6 +36,13 @@ function loadRecaptchaScript(siteKey: string): Promise<void> {
  * `null` (instead of throwing) whenever the site key is missing or the
  * script fails to load, so the login flow degrades gracefully — the server
  * treats a missing token as unconfigured/rejected as appropriate.
+ *
+ * Failures are logged with their actual reason (e.g. grecaptcha.execute()
+ * rejects client-side with codes like "browser-error" when Google's script
+ * can't complete the challenge — commonly caused by an ad blocker/privacy
+ * extension blocking google.com, or the site key's domain not being
+ * authorized). That reason previously got silently discarded, which made
+ * "Unable to verify reCAPTCHA" impossible to diagnose from just the UI.
  */
 export function useRecaptcha(siteKey: string | undefined) {
   const loadedRef = useRef(false);
@@ -45,31 +52,48 @@ export function useRecaptcha(siteKey: string | undefined) {
       return;
     }
     loadedRef.current = true;
-    loadRecaptchaScript(siteKey).catch(() => {
-      loadedRef.current = false;
-    });
+    loadRecaptchaScript(siteKey)
+      .then(() => console.log("[recaptcha] Script loaded successfully."))
+      .catch((error: unknown) => {
+        console.error("[recaptcha] Script failed to load:", error);
+        loadedRef.current = false;
+      });
   }, [siteKey]);
 
   const execute = useCallback(
     async (action: string): Promise<string | null> => {
       if (!siteKey) {
+        console.warn(
+          "[recaptcha] No NEXT_PUBLIC_RECAPTCHA_SITE_KEY configured — skipping token generation."
+        );
         return null;
       }
 
       try {
         await loadRecaptchaScript(siteKey);
-      } catch {
+      } catch (error) {
+        console.error("[recaptcha] Script load failed during execute():", error);
         return null;
       }
 
       const grecaptcha = window.grecaptcha;
       if (!grecaptcha) {
+        console.error("[recaptcha] window.grecaptcha is unavailable after script load.");
         return null;
       }
 
       return new Promise<string | null>((resolve) => {
         grecaptcha.ready(() => {
-          grecaptcha.execute(siteKey, { action }).then(resolve).catch(() => resolve(null));
+          grecaptcha
+            .execute(siteKey, { action })
+            .then((token) => {
+              console.log("[recaptcha] Token generated successfully.");
+              resolve(token);
+            })
+            .catch((error: unknown) => {
+              console.error("[recaptcha] grecaptcha.execute() rejected:", error);
+              resolve(null);
+            });
         });
       });
     },
