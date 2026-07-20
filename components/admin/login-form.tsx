@@ -7,18 +7,45 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
+import { useRecaptcha } from "@/hooks/use-recaptcha";
 import { adminCredentialsSchema, type AdminCredentials } from "@/lib/validations/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+const ERROR_DISPLAY_MS = 5000;
+
+const ERROR_MESSAGES: Record<string, string> = {
+  invalid_credentials: "Invalid email or password.",
+  rate_limited: "Too many failed login attempts. Please try again in 10 minutes.",
+  recaptcha_failed: "Unable to verify reCAPTCHA. Please refresh the page.",
+};
+
+function resolveErrorMessage(code: string | undefined): string {
+  if (code && code in ERROR_MESSAGES) {
+    return ERROR_MESSAGES[code]!;
+  }
+  return ERROR_MESSAGES.invalid_credentials!;
+}
+
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/admin";
+  const { execute: executeRecaptcha } = useRecaptcha(
+    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  );
 
   const [error, setError] = React.useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!error) {
+      return;
+    }
+    const timeout = setTimeout(() => setError(null), ERROR_DISPLAY_MS);
+    return () => clearTimeout(timeout);
+  }, [error]);
 
   const {
     register,
@@ -32,13 +59,16 @@ export function LoginForm() {
     setError(null);
     setIsSubmitting(true);
 
+    const recaptchaToken = await executeRecaptcha("login");
+
     const result = await signIn("credentials", {
       ...data,
+      recaptchaToken: recaptchaToken ?? "",
       redirect: false,
     });
 
     if (!result || result.error) {
-      setError("Invalid email or password");
+      setError(resolveErrorMessage(result?.code));
       setIsSubmitting(false);
       return;
     }
