@@ -30,7 +30,7 @@ export function About() {
           >
             <div className="gradient-border relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
               <Image
-                src="/images/profile.png"
+                src="/images/profile.jpeg"
                 alt={`Portrait of ${SITE_CONFIG.name}`}
                 fill
                 sizes="(max-width: 1024px) 60vw, 400px"

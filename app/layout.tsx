@@ -71,8 +71,8 @@ const personJsonLd = {
     addressLocality: SITE_CONFIG.location,
   },
   sameAs: [
-    "https://github.com/mubashirijaz",
-    "https://linkedin.com/in/mubashirijaz",
+    "https://github.com/Mubashir0408",
+    "https://www.linkedin.com/in/mubashir-ijaz-2b03a9319/",
   ],
 };
 

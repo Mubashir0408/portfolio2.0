@@ -120,7 +120,7 @@ export function Hero() {
             <MagneticButton>
               <Button asChild variant="ghost" size="lg">
                 <a
-                  href="https://github.com/mubashirijaz"
+                  href="https://github.com/Mubashir0408"
                   target="_blank"
                   rel="noreferrer noopener"
                 >

@@ -48,8 +48,8 @@ export const PERSONAL_INFO = {
 
   // TODO: replace with your real GitHub / LinkedIn usernames (used to build
   // full profile URLs everywhere on the site — navbar, footer, contact page).
-  githubUsername: "mubashirijaz",
-  linkedinUsername: "mubashirijaz",
+  githubUsername: "Mubashir0408",
+  linkedinUsername: "mubashir-ijaz-2b03a9319",
 
   // TODO: replace with your real production domain once deployed (used for
   // SEO metadata, Open Graph tags, and sitemap.xml generation).
@@ -406,7 +406,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Ayesha Khan",
     role: "Product Manager",
     company: "TechNova Solutions",
-    avatar: "/images/profile.png",
+    avatar: "/images/profile.jpeg",
     content:
       "Mubashir delivered our restaurant management platform ahead of schedule with impeccable attention to detail. His communication and technical judgment stood out immediately.",
   },
@@ -415,7 +415,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Hamza Tariq",
     role: "Founder",
     company: "ShopLine",
-    avatar: "/images/profile.png",
+    avatar: "/images/profile.jpeg",
     content:
       "Working with Mubashir on our e-commerce store was seamless. He understood our requirements quickly and shipped a fast, reliable, and beautifully designed product.",
   },
@@ -424,7 +424,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Sara Ahmed",
     role: "CTO",
     company: "Nexus Labs",
-    avatar: "/images/profile.png",
+    avatar: "/images/profile.jpeg",
     content:
       "One of the most detail-oriented developers I've worked with. Clean code, thoughtful architecture, and genuinely great UI instincts.",
   },

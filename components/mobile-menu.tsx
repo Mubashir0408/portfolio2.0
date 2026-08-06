@@ -75,7 +75,7 @@ export function MobileMenu() {
 
               <div className="mt-4 flex items-center gap-3 px-4">
                 <a
-                  href="https://github.com/mubashirijaz"
+                  href="https://github.com/Mubashir0408"
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="GitHub"
@@ -84,7 +84,7 @@ export function MobileMenu() {
                   <Github className="size-5" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/mubashirijaz"
+                  href="https://www.linkedin.com/in/mubashir-ijaz-2b03a9319/"
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="LinkedIn"

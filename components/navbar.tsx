@@ -62,7 +62,7 @@ export function Navbar() {
           <div className="flex items-center gap-2">
             <div className="hidden items-center gap-1 md:flex">
               <a
-                href="https://github.com/mubashirijaz"
+                href="https://github.com/Mubashir0408"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="GitHub"
@@ -71,7 +71,7 @@ export function Navbar() {
                 <Github className="size-[18px]" />
               </a>
               <a
-                href="https://linkedin.com/in/mubashirijaz"
+                href="https://www.linkedin.com/in/mubashir-ijaz-2b03a9319/"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label="LinkedIn"
