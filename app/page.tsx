@@ -7,7 +7,6 @@ import { About } from "@/components/about";
 import { Skills } from "@/components/skills";
 import { Projects } from "@/components/projects";
 import { Stats } from "@/components/stats";
-import { Testimonials } from "@/components/testimonials";
 import { Contact } from "@/components/contact";
 
 export const metadata: Metadata = {
@@ -27,7 +26,6 @@ export default function HomePage() {
       <Skills />
       <Projects />
       <Stats />
-      <Testimonials />
       <Contact />
     </>
   );

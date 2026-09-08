@@ -92,7 +92,7 @@ export function Skills() {
                 className={cn(
                   "flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-300",
                   isActive
-                    ? "border-primary/40 bg-primary/10 text-primary shadow-[0_0_20px_rgba(99,102,241,0.25)]"
+                    ? "border-primary/40 bg-primary/10 text-primary shadow-[0_0_20px_rgba(16,185,129,0.2)]"
                     : "border-border text-muted-foreground hover:border-primary/20 hover:text-foreground"
                 )}
                 aria-pressed={isActive}

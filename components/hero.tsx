@@ -149,7 +149,7 @@ export function Hero() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           className="relative mx-auto hidden aspect-square w-full max-w-md lg:block"
         >
-          <div className="gradient-border absolute inset-8 rounded-[2rem] shadow-[0_0_80px_rgba(99,102,241,0.25)]">
+          <div className="gradient-border absolute inset-8 rounded-[2rem] shadow-[0_0_80px_rgba(16,185,129,0.2)]">
             <div className="flex h-full w-full items-center justify-center rounded-[2rem] bg-gradient-to-br from-card/80 to-background/40">
               <span className="text-8xl font-extrabold text-foreground/10">MI</span>
             </div>

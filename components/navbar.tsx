@@ -35,7 +35,7 @@ export function Navbar() {
             href="/"
             className="flex items-center gap-2 text-lg font-bold tracking-tight text-foreground"
           >
-            <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-sm font-extrabold text-white">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-secondary text-sm font-extrabold text-primary-foreground">
               MI
             </span>
             <span className="hidden sm:inline">Mubashir Ijaz</span>

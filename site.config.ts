@@ -8,7 +8,6 @@
  *    - your social links (GitHub, LinkedIn, email)
  *    - your skills, timeline, and stats
  *    - your projects (title, description, tech stack, links, images)
- *    - your testimonials
  *    - your blog posts
  *
  *  Everything else in the codebase (components, pages) reads from here —
@@ -24,7 +23,6 @@ import type {
   BlogPost,
   Project,
   SkillCategory,
-  Testimonial,
   TimelineItem,
 } from "@/types/project";
 
@@ -398,40 +396,7 @@ export const PROJECTS: Project[] = [
 ];
 
 /* ----------------------------------------------------------------------- */
-/*  8. TESTIMONIALS                                                         */
-/* ----------------------------------------------------------------------- */
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: "test1",
-    name: "Ayesha Khan",
-    role: "Product Manager",
-    company: "TechNova Solutions",
-    avatar: "/images/profile.jpeg",
-    content:
-      "Mubashir delivered our restaurant management platform ahead of schedule with impeccable attention to detail. His communication and technical judgment stood out immediately.",
-  },
-  {
-    id: "test2",
-    name: "Hamza Tariq",
-    role: "Founder",
-    company: "ShopLine",
-    avatar: "/images/profile.jpeg",
-    content:
-      "Working with Mubashir on our e-commerce store was seamless. He understood our requirements quickly and shipped a fast, reliable, and beautifully designed product.",
-  },
-  {
-    id: "test3",
-    name: "Sara Ahmed",
-    role: "CTO",
-    company: "Nexus Labs",
-    avatar: "/images/profile.jpeg",
-    content:
-      "One of the most detail-oriented developers I've worked with. Clean code, thoughtful architecture, and genuinely great UI instincts.",
-  },
-];
-
-/* ----------------------------------------------------------------------- */
-/*  9. BLOG POSTS                                                           */
+/*  8. BLOG POSTS                                                           */
 /* ----------------------------------------------------------------------- */
 export const BLOG_POSTS: BlogPost[] = [
   {

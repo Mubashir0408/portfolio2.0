@@ -13,7 +13,7 @@ interface GlowCardProps extends Omit<HTMLMotionProps<"div">, "children"> {
 export function GlowCard({
   children,
   className,
-  glowColor = "rgba(99,102,241,0.35)",
+  glowColor = "rgba(16,185,129,0.14)",
   ...props
 }: GlowCardProps) {
   const [coords, setCoords] = React.useState({ x: 50, y: 50 });
@@ -32,7 +32,7 @@ export function GlowCard({
       whileHover={{ y: -6 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "group relative overflow-hidden rounded-3xl border border-border bg-card/60 backdrop-blur-xl",
+        "group relative overflow-hidden rounded-3xl border border-border bg-card/60 backdrop-blur-xl transition-colors duration-300 hover:border-primary/30",
         className
       )}
       {...props}

@@ -51,15 +51,6 @@ export interface SkillCategory {
   skills: Skill[];
 }
 
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  company: string;
-  avatar: string;
-  content: string;
-}
-
 export interface BlogPost {
   slug: string;
   title: string;

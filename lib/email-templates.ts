@@ -23,7 +23,7 @@ function layout(content: string): string {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background-color:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb;">
             <tr>
-              <td style="background-color:#111827;padding:24px 32px;">
+              <td style="background-color:#050505;padding:24px 32px;">
                 <span style="color:#ffffff;font-size:18px;font-weight:700;letter-spacing:-0.02em;">${escapeHtml(
                   SITE_CONFIG.name
                 )}</span>
@@ -41,7 +41,7 @@ function layout(content: string): string {
               <td style="padding:20px 32px;background-color:#f9fafb;border-top:1px solid #e5e7eb;">
                 <p style="margin:0;font-size:12px;color:#9ca3af;">
                   Sent from the contact form at
-                  <a href="${SITE_CONFIG.url}" style="color:#6366f1;text-decoration:none;">${escapeHtml(
+                  <a href="${SITE_CONFIG.url}" style="color:#047857;text-decoration:none;">${escapeHtml(
     SITE_CONFIG.url.replace(/^https?:\/\//, "")
   )}</a>
                 </p>
@@ -85,7 +85,7 @@ export function renderAdminNotificationEmail({
       <tr>
         <td style="padding:8px 0;font-size:13px;color:#6b7280;vertical-align:top;">Email</td>
         <td style="padding:8px 0;font-size:14px;">
-          <a href="mailto:${escapeHtml(email)}" style="color:#6366f1;text-decoration:none;">${escapeHtml(
+          <a href="mailto:${escapeHtml(email)}" style="color:#047857;text-decoration:none;">${escapeHtml(
     email
   )}</a>
         </td>
@@ -132,7 +132,7 @@ export function renderAutoReplyEmail({ name }: AutoReplyInput): string {
     </p>
     <table role="presentation" cellpadding="0" cellspacing="0">
       <tr>
-        <td style="border-radius:8px;background-color:#111827;">
+        <td style="border-radius:8px;background-color:#047857;">
           <a href="${SITE_CONFIG.url}" style="display:inline-block;padding:10px 20px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">
             Visit ${escapeHtml(SITE_CONFIG.name.split(" ")[0] ?? SITE_CONFIG.name)}'s Portfolio
           </a>

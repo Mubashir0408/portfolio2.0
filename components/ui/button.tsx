@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[0_0_0_1px_rgba(99,102,241,0.3)] hover:shadow-[0_0_24px_rgba(99,102,241,0.5)] hover:-translate-y-0.5",
+          "bg-primary text-primary-foreground shadow-[0_0_0_1px_rgba(16,185,129,0.25)] hover:brightness-110 hover:shadow-[0_0_24px_rgba(16,185,129,0.4)] hover:-translate-y-0.5",
         secondary:
-          "bg-secondary text-secondary-foreground hover:-translate-y-0.5 hover:shadow-[0_0_24px_rgba(139,92,246,0.4)]",
+          "border border-primary/40 bg-primary/10 text-foreground hover:border-primary/60 hover:bg-primary/20 hover:-translate-y-0.5",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-foreground/5 hover:-translate-y-0.5",
+          "border border-border bg-transparent text-foreground hover:border-primary/40 hover:bg-foreground/5 hover:-translate-y-0.5",
         ghost: "text-foreground hover:bg-foreground/5",
         glass: "glass text-foreground hover:bg-foreground/10 hover:-translate-y-0.5",
         link: "text-primary underline-offset-4 hover:underline",
